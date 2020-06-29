@@ -1,0 +1,1 @@
+A project for developing all sorts of Computer Vision stuff to be used in other projects.
