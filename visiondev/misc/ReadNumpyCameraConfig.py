@@ -6,10 +6,10 @@ framerate = 30
 midpt = [resolution[0] / 2, resolution[1] / 2]
 frameSize = resolution[0] * resolution[1]
 
-with np.load('src/camera_properties.npz') as npCamConfigFile:
+with np.load('data/calibration/configs/camera_properties.npz') as npCamConfigFile:
     mtx, dist = [npCamConfigFile[i] for i in ('arr_0','arr_1')]
 
-CameraConfig = open('test/MiscTestScripts/CameraConfig.cfg', 'w')
+CameraConfig = open('data/calibration/configs/CameraConfig.cfg', 'w')
 
 CameraConfig.write(json.dumps(resolution) + '\n')
 CameraConfig.write(json.dumps(framerate) + '\n')

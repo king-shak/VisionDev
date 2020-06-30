@@ -1,7 +1,16 @@
-from visiondev.common.vision.pnp import TargetModel
-from visiondev.common.vision.contour import *
-from visiondev.common.util.math import Vector3, Rotation3, RigidTransform3
-from visiondev.common.vision.pnp import getTranslation, getAngleToTarget
+'''
+    This implmentation of the pipeline is the most up-to-date and sophisticated one. It uses the new Common library.
+
+    This implmentation of the pipeline can also be found in the tkinter version of the pipeline configurator. The one in the OpenCV version
+    is significantly out of date.
+
+    Here you can choose a sample image and run it through the pipeline as a benchmark to evaluate its performance.
+'''
+
+from common.vision.pnp import TargetModel
+from common.vision.contour import *
+from common.util.math import Vector3, Rotation3, RigidTransform3
+from common.vision.pnp import getTranslation, getAngleToTarget
 import json
 from math import atan2, cos, sin, sqrt, pi
 import cv2 as cv
@@ -21,17 +30,20 @@ framerate = 60
 distortionCoefficients = []
 cameraMatrix = []
 
-targetModel = open('data/TargetModel.mdl', 'r')
-targetModel = TargetModel('data/TargetModel.mdl')
+targetModel = TargetModel('data/misc/TargetModel.mdl')
 
 def pipeline(frame):
     pipelineStart = time.time()
     #  Now we threshold
     frame_hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
 
-    # 2019 target thresholding values
-    minThresh = (57, 105, 154)
-    maxThresh = (72, 255, 255)
+    # # 2019 target thresholding values
+    # minThresh = (57, 105, 154)
+    # maxThresh = (72, 255, 255)
+
+    # 2020 target thresholding values
+    minThresh = (69, 225, 165)
+    maxThresh = (87, 255, 255)
 
     frame_threshold = cv.inRange(frame_hsv, minThresh, maxThresh)
 
@@ -82,7 +94,7 @@ def pipeline(frame):
         target = [sortedContours[0]]
 
         # Check if we should pair the contours
-        _pairContours = True
+        _pairContours = False
         intersectionLocation = 'above'
         if (_pairContours):
             intersectionLocation = intersectionLocation
@@ -130,5 +142,15 @@ def pipeline(frame):
         cv.imshow('Pipeline Output', frame)
     cv.waitKey(0)
 
-frame = cv.imread('data/test1.jpg')
-pipeline(frame)
+# This bit does it on the 2019 Hatch target
+# frame = cv.imread('data/targets/2019Hatch/test1.jpg')
+# pipeline(frame)
+
+# This bit will go through the sample images of the 2020 goal
+pathToFrames = 'data/targets/2020OuterGoal/*.jpg'
+frames = glob.glob(pathToFrames)
+
+for frame in frames:
+    frame = cv.imread(frame)
+    pipeline(frame)
+    time.sleep(0.01)

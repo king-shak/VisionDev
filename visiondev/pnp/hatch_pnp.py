@@ -5,7 +5,7 @@ import glob
 import logging
 import collections
 
-with np.load('src/camera_properties.npz') as X:
+with np.load('data/calibration/configs/camera_properties.npz') as X:
     mtx, dist = [X[i] for i in ('arr_0','arr_1')]
 
 logging.basicConfig(level=logging.DEBUG)

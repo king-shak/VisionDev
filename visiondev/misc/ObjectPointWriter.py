@@ -12,7 +12,7 @@ objp = np.array([
     [7.3134, -2.4120, 0]
 ], dtype=np.float32)
 
-TargetModel = open('test/MiscTestScripts/TargetModel.mdl', 'w')
+TargetModel = open('data/misc/TargetModel.mdl', 'w+')
 
 TargetModel.write(json.dumps(objp.tolist()))
 

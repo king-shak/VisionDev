@@ -5,12 +5,12 @@ import glob
 # set this to zero if you want to want to go through each individual image
 DELAY_PERIOD = 0
 
-PATH_TO_IMAGES = 'images/*.jpg'
+PATH_TO_IMAGES = 'data/calibration/xbox_live_vision_cam/*.jpg'
 
 GRID_WIDTH = 6
 GRID_HEIGHT = 9
 
-with np.load('src/camera_properties.npz') as X:
+with np.load('data/calibration/configs/camera_properties.npz') as X:
     mtx, dist = [X[i] for i in ('arr_0','arr_1')]
 
 def dot(a, b, mode):

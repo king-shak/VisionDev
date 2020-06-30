@@ -1,11 +1,8 @@
+# Yeah so this is basically just used to get thresholding values for static images...may want to clean it up for that
+# Need to update the tkinter version so you can switch it to work with a static image
+
 import cv2 as cv
 import numpy as np
-import src.Util.VisionUtil.VisionUtil as VisionUtil
-import src.Util.VisionUtil.Contour as Contour
-import src.Util.VisionUtil.ContourGroup as ContourGroup
-
-Contour = Contour.Contour
-ContourGroup = ContourGroup.ContourGroup
 
 # with np.load('src/camera_properties.npz') as X:
 #     mtx, dist = [X[i] for i in ('arr_0','arr_1')]
@@ -298,7 +295,7 @@ while True:
     # ret, frame = cap.read()
     # frame = cv.imread('test\\TestImages\\OuterGoal\\BlueGoal-084in-Center.jpg')
     # frame = cv.imread('test\\TestImages\\OuterGoal\\BlueGoal-330in-ProtectedZone.jpg')
-    frame = cv.imread('test\\TestImages\\test1.jpg')
+    frame = cv.imread('data/targets/2019Hatch/test1.jpg')
     ret = True
     if (ret):
         # Perform a median blur to remove salt and pepper noise

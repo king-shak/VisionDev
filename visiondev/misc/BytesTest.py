@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 import time
 
-img = cv.imread('test\\TestImages\\test1.jpg')
+img = cv.imread('data/targets/2019Hatch/test1.jpg')
 
 cv.imshow('img', img)
 cv.waitKey(0)
